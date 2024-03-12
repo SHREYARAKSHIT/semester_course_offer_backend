@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "488930c2-4ae4-4d60-a1cd-cb42f026f83d",
+		"name": "Common",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23056297",
+		"_collection_link": "https://warped-comet-984702.postman.co/workspace/a2d52154-5d32-40ee-9982-3d0846d15118/collection/23056297-488930c2-4ae4-4d60-a1cd-cb42f026f83d?action=share&source=collection_link&creator=23056297"
+	},
+	"item": [
+		{
+			"name": "Common",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 27141|vJR9jk2GLFgudstoCDFKcEtXWBk2ZqmdkCEBNSTd",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "1594",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "p",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "9901370541",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TokenError",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/TokenError",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"TokenError"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 8|7mkGhoPA3uJfhDLBkIwFfi4ZNuJSCW5G8JufqZ0G",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1389",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "p",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/update_password",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"update_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 150|xyZzTTbwvJvwd1Gx1F69KOnvQdoYdRM0ZyVl5ArG",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "eyJpdiI6IkxITXlvUHpKd01KMzB3dVk0U3pnVEE9PSIsInZhbHVlIjoiK25tMUxudkJVU09GRGl3MVFSRHlkWmlnTEdlQnVYNWlGWEFDZHBaODRpQ2tKQUpzRGZ6VWd6dlo1d0w1c1lpMVp2T205cElmSC9rQ0kyU0lSSWZ1Q05DMjE2WDVrU0lBbVdtUmRmTWw0K0R2Q2EyV3YrQ0Q4L3E1RTF5dm50RW8iLCJtYWMiOiI1NTQwYzRjYjhiYzZiYjZkYmQ1OWE4ZmY0MmIxOTFkZTQ3YjcxMTFjYzUyNWJhYTA0MzRhNjQ3NTZhOTBjZDgxIiwidGFnIjoiIn0%3D",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{devurl}}/refresh",
+							"host": [
+								"{{devurl}}"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 2997w1qC5QYFQgZToAeEUcisBybWTg03ckj0rh9gJ8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
