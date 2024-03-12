@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS `auth_types` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table project.auth_types: ~0 rows (approximately)
+-- Dumping data for table project.auth_types: ~1 rows (approximately)
 DELETE FROM `auth_types`;
+INSERT INTO `auth_types` (`id`, `type`) VALUES
+	('stock_assistant_cc', 'Stock Assistant CC');
 
 -- Dumping structure for table project.departments
 CREATE TABLE IF NOT EXISTS `departments` (
@@ -82,13 +84,14 @@ CREATE TABLE IF NOT EXISTS `login_logout_log` (
   PRIMARY KEY (`log_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table project.login_logout_log: ~4 rows (approximately)
+-- Dumping data for table project.login_logout_log: ~5 rows (approximately)
 DELETE FROM `login_logout_log`;
 INSERT INTO `login_logout_log` (`log_id`, `user_id`, `logged_in_time`, `logged_out_time`, `login_ip`, `logout_ip`, `login_from`) VALUES
 	(1, '1594', '2024-03-12 09:06:22', NULL, '127.0.0.1', NULL, 'MIS'),
 	(2, '1594', '2024-03-12 09:23:22', NULL, '127.0.0.1', NULL, 'MIS'),
 	(3, '1594', '2024-03-12 09:39:22', NULL, '127.0.0.1', NULL, 'MIS'),
-	(4, '1594', '2024-03-12 09:50:23', NULL, '127.0.0.1', NULL, 'MIS');
+	(4, '1594', '2024-03-12 09:50:23', NULL, '127.0.0.1', NULL, 'MIS'),
+	(5, '1594', '2024-03-12 09:51:39', NULL, '127.0.0.1', NULL, 'MIS');
 
 -- Dumping structure for table project.mis_session
 CREATE TABLE IF NOT EXISTS `mis_session` (
@@ -185,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 -- Dumping data for table project.personal_access_tokens: ~1 rows (approximately)
 DELETE FROM `personal_access_tokens`;
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-	(8, 'App\\Models\\User', '1594', 'mis_MyApp', '8e99a581e7e8692792bf54fb88c494177111288f870cb91b73030d0f3f665afd', '["server:update"]', '2024-03-12 03:53:52', NULL, '2024-03-12 03:53:50', '2024-03-12 03:53:52');
+	(9, 'App\\Models\\User', '1594', 'mis_MyApp', '3349da4059f202e49b208e11f380413ec7302ce7177e934907236f64361c3909', '["server:update"]', NULL, NULL, '2024-03-12 04:09:51', '2024-03-12 04:09:51');
 
 -- Dumping structure for table project.personal_access_tokens_log
 CREATE TABLE IF NOT EXISTS `personal_access_tokens_log` (
@@ -203,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens_log` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table project.personal_access_tokens_log: ~7 rows (approximately)
+-- Dumping data for table project.personal_access_tokens_log: ~8 rows (approximately)
 DELETE FROM `personal_access_tokens_log`;
 INSERT INTO `personal_access_tokens_log` (`id`, `token_id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'App\\Models\\User', 1594, 'mis_MyApp', 'df86ccb3adfb297a5ab8688c034801225e6b108bf339d20e450023b718324e2f', '["server:update"]', NULL, NULL, '2024-03-12 09:20:46', '2024-03-12 09:20:46'),
@@ -212,7 +215,8 @@ INSERT INTO `personal_access_tokens_log` (`id`, `token_id`, `tokenable_type`, `t
 	(4, 4, 'App\\Models\\User', 1594, 'mis_MyApp', '811c8ae4d1dff58c3490223a22c08480c4c9f60dbd17a057b7070a704eab2c9b', '["server:update"]', NULL, NULL, '2024-03-12 09:22:06', '2024-03-12 09:22:06'),
 	(5, 5, 'App\\Models\\User', 1594, 'mis_MyApp', 'aab38aca168b62cb389e40541ce9bd4e471ba75d08d7a316ca33eb6eb75a7974', '["server:update"]', NULL, NULL, '2024-03-12 09:22:23', '2024-03-12 09:22:23'),
 	(6, 6, 'App\\Models\\User', 1594, 'mis_MyApp', 'af097c3fe799ed856ffc7970b2d41bc4806b5b6190e99260e119b556f5a00364', '["server:update"]', '2024-03-12 03:52:31', NULL, '2024-03-12 09:22:39', '2024-03-12 09:22:39'),
-	(7, 7, 'App\\Models\\User', 1594, 'mis_MyApp', 'b451563d72c004d165f25eefafacfa7de03628a146d7537fb3860406ac4fd79d', '["server:update"]', '2024-03-12 03:53:43', NULL, '2024-03-12 09:23:50', '2024-03-12 09:23:50');
+	(7, 7, 'App\\Models\\User', 1594, 'mis_MyApp', 'b451563d72c004d165f25eefafacfa7de03628a146d7537fb3860406ac4fd79d', '["server:update"]', '2024-03-12 03:53:43', NULL, '2024-03-12 09:23:50', '2024-03-12 09:23:50'),
+	(8, 8, 'App\\Models\\User', 1594, 'mis_MyApp', '8e99a581e7e8692792bf54fb88c494177111288f870cb91b73030d0f3f665afd', '["server:update"]', '2024-03-12 03:53:52', NULL, '2024-03-12 09:39:51', '2024-03-12 09:39:51');
 
 -- Dumping structure for table project.tms_auth_menu_detail
 CREATE TABLE IF NOT EXISTS `tms_auth_menu_detail` (
@@ -338,13 +342,14 @@ CREATE TABLE IF NOT EXISTS `user_login_attempts` (
   CONSTRAINT `user_login_attempts_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table project.user_login_attempts: ~5 rows (approximately)
+-- Dumping data for table project.user_login_attempts: ~6 rows (approximately)
 DELETE FROM `user_login_attempts`;
 INSERT INTO `user_login_attempts` (`id`, `time`, `password`, `status`, `ip`) VALUES
 	('1594', '2024-03-12 09:06:22', 'p', 'Success', '127.0.0.1'),
 	('1594', '2024-03-12 09:23:22', 'p', 'Success', '127.0.0.1'),
 	('1594', '2024-03-12 09:39:22', 'p', 'Success', '127.0.0.1'),
 	('1594', '2024-03-12 09:50:23', 'p', 'Success', '127.0.0.1'),
+	('1594', '2024-03-12 09:51:39', 'p', 'Success', '127.0.0.1'),
 	('1594', '2024-03-12 09:53:19', 'p', 'Failed', '127.0.0.1');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
