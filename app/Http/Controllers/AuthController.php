@@ -28,14 +28,7 @@ class AuthController extends ControllerAPI
             'errorCode' => '101',
         ], 409);
     }
-    public function GetBiometicAttendance(Request $request)
-    {
-        $sql = "SET @SQL = NULL;
-         WITH RECURSIVE t AS ( SELECT DATE_FORMAT('2023/11/10', '%Y/%m/%d') AS dt UNION SELECT DATE_FORMAT(DATE_ADD(t.dt, INTERVAL 1 DAY), '%Y/%m/%d') FROM t WHERE DATE_ADD(t.dt, INTERVAL 1 DAY) <= DATE_FORMAT('2023/11/11', '%Y-%m-%d') ) SELECT GROUP_CONCAT(DISTINCT CONCAT( 'GROUP_CONCAT(DISTINCT (case when a.Attn_date=''', t.dt,''' then if(a.InTime > ''17:00'',concat_ws('''',concat(''A'','' ('',a.Intime,'')'')), if(FinalStatus=''P'', concat_ws('''',concat(FinalStatus,'' ('',a.Intime,'')'')),FinalStatus)) else null END)) AS ', CONCAT('''',DATE_FORMAT(t.dt, '%d-%m-%Y'),' (In TIME)'''),'' )) INTO @SQL FROM t; 
-         SET @SQL = CONCAT('SELECT a.admn_no,a.stu_name,a.course_id,a.dept_id,', @SQL, ',sum((case when (a.FinalStatus=''P'' AND a.InTime < ''17:00'') then 1 ELSE 0 END)) AS ''total_present'', sum((case when (a.FinalStatus=''A'' OR a.InTime > ''17:00'') then 1 ELSE 0 END)) AS ''total_absent'' FROM (SELECT a.id AS admn_no,CONCAT_WS('' '',a.first_name,a.middle_name,a.last_name) AS stu_name,a.dept_id,b.auth_id,b.course_id,c.* FROM user_details a INNER JOIN stu_academic b ON a.id=b.admn_no AND b.auth_id=''pg'' INNER JOIN users u ON a.id=u.id AND u.status=''A'' LEFt JOIN biometric_attendance c ON c.EmpID LIKE CONCAT(''%'',a.id,''%'') AND c.Attn_date BETWEEN ''2023/11/10'' AND ''2023/11/11'' WHERE a.dept_id=''ccb'' ORDER BY a.id)a GROUP BY a.admn_no'); PREPARE stmt1 FROM @SQL; EXECUTE stmt1;";
-        $result = DB::unprepared(DB::raw($sql));//DB::unprepared($sql);// DB::select($sql);
-        print_r($result);
-    }
+
 
     function logout(Request $request)
     {
@@ -153,11 +146,7 @@ class AuthController extends ControllerAPI
         }
 
 
-        $checkForUserType = DB::table('stu_academic')->where('admn_no', $user_id)->where('auth_id', 'jrf')->count();
-
-        if (!$checkForUserType) {
-            //   return $this->sendError('Unauthorised', 'Invalid User Type !.');
-        }
+       
 
         $pass = $this->strclean($request->password);
         $created_date = trim($checkforuser->created_date);
