@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\tms\TmsStudentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,4 @@ Route::get('/login', function () {
 Route::controller(AdminController::class)->group(function () {
     //  Route::get('test', 'test');
 });
-Route::controller(TmsStudentController::class)->group(function () {
-    Route::match(['get', 'post'], 'testpdf', 'test');
-});
+
