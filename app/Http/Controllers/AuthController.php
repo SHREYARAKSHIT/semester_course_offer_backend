@@ -159,8 +159,7 @@ class AuthController extends ControllerAPI
         );
         $user_login_attemp = array(
             'id' => $user_id,
-            'time' => date('Y-m-d h:s:i'),
-            'password' => $pass,
+            'time' => date('Y-m-d h:s:i'),           
             'ip' => $this->get_client_ip()
         );
         $LogAccessToken = $this->LogAccessToken($user_id);
