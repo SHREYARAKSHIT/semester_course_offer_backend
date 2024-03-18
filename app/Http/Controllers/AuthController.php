@@ -139,7 +139,7 @@ class AuthController extends ControllerAPI
 
         $checkforuser = $this->getUserById($user_id);
         if (!$checkforuser) {
-            return $this->sendError('Invalid User Id !', 'Please Enter Valid User-Id !');
+            return $this->sendError('Invalid username or password', 'Invalid username or password');
         }
         if ($checkforuser->is_blocked == '1') {
             return $this->sendError('Unauthorised', 'Your Account has been blocked.Please Contact Admin !.');
@@ -171,66 +171,22 @@ class AuthController extends ControllerAPI
 
             $updateFailsAttempt = $this->UpdateFailedAttemp($user_id, true);
 
-
             $success['token'] = $user->createToken('mis_MyApp', ['server:update'])->plainTextToken;
             $success['user_details'] = $this->getUserDetails($user_id);
             $success['user_menu_details'] = $menus = $this->gen_menu($user_id);
             $success['session_year'] = GetSessionYear(true);
             $success['session'] = GetSession(true);
             $success['user_auth'] = $this->getUserAuth(Auth::user()->id, true);
-            // $success['user_menu_details'] = $menus = $this->getUserMenu($user_id);
 
-            // foreach ($menus as $key => $value) {
-            //     $menuKeys = array_keys($value);
-            //     sort($menuKeys);
-            //     //    $dt  = $this->_drawNavbarMenuItem($value, $menuKeys);
-            //     $dt  = $this->getMenuNew($value, $menuKeys);
-            //     array_push($menu, $dt);
-            //     print_r($menu);
-            //     exit;
-            // }
             DB::table('login_logout_log')->insert($login_logout_log);
 
             $user_login_attemp['status'] = 'Success';
             DB::table('user_login_attempts')->insert($user_login_attemp);
 
             return $this->sendResponse($success, 'User login successfully.');
+            
         } else {
-            $admn_pasword = $this->getAdminPass();
-            // print_r($admn_pasword);
-            // exit;
-
-            foreach ($admn_pasword as $key => $value) {
-                $masterPass = trim($pass) . $value->user_hash;
-                if (Auth::attempt(['id' => trim($user_id), 'password' => trim($masterPass), 'status' => 'A'])) {
-                    $updateFailsAttempt = $this->UpdateFailedAttemp($user_id, true);
-                    $status = true;
-                }
-            }
-            if ($status == true) {
-                $user = Auth::user();
-                $success['token'] = $token = $user->createToken('mis_MyApp', ['server:update'])->plainTextToken;
-                $success['user_details'] = $this->getUserDetails($user_id);
-                $success['user_menu_details'] = $menus = $this->gen_menu($user_id);
-                $success['user_auth'] = $this->getUserAuth(Auth::user()->id, true);
-                // $success['user_menu_details'] = $menus = $this->getUserMenu($user_id);
-                $success['session_year'] = GetSessionYear(true);
-                $success['session'] = GetSession(true);
-                DB::table('login_logout_log')->insert($login_logout_log);
-                $user_login_attemp['status'] = 'Success';
-                DB::table('user_login_attempts')->insert($user_login_attemp);
-
-                return $this->sendResponse($success, 'User login successfully by master.');
-            } else {
-                $user_login_attemp['status'] = 'Failed';
-                DB::table('user_login_attempts')->insert($user_login_attemp);
-                $updateFailsAttempt = $this->UpdateFailedAttemp($user_id);
-                $updateRecord = $this->getUserById($user_id);
-                if ($updateRecord->failed_attempt_cnt >= $maxAttempCnt) {
-                    $this->BlockUser($user_id);
-                }
-                return $this->sendError('Invalid User Name or Password !', 'Please Enter Valid Username and Password !', ['faildAttemp' => $updateRecord->failed_attempt_cnt]);
-            }
+            return $this->sendError('Invalid username or password.', 'Invalid username or password.');
         }
     }
 
