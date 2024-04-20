@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProcessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,7 @@ use App\Http\Controllers\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 
 Route::fallback(function () {
     return response()->json([
@@ -42,3 +44,4 @@ Route::controller(AuthController::class)->group(function () {
 
 include('adminRoutes.php');
 include('userRoutes.php');
+include('courseOffer.php');
